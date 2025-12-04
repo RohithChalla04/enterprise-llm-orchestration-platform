@@ -1,48 +1,94 @@
 # enterprise-llm-orchestration-platform
 
-enterprise-llm-orchestration-platform/
-│
-├── README.md
-├── requirements.txt
-├── .gitignore
-│
-├── src/
-│   ├── main.py
-│   ├── __init__.py
-│
-│   ├── orchestrator/
-│   │   ├── __init__.py
-│   │   ├── workflow_engine.py
-│   │   ├── task_router.py
-│   │   ├── retry_policy.py
-│   │   └── state_manager.py
-│
-│   ├── agents/
-│   │   ├── __init__.py
-│   │   ├── classifier_agent.py
-│   │   ├── summarizer_agent.py
-│   │   ├── extractor_agent.py
-│   │   └── decision_agent.py
-│
-│   ├── api/
-│   │   ├── __init__.py
-│   │   └── routes.py
-│
-│   ├── connectors/
-│   │   ├── __init__.py
-│   │   ├── google_drive.py
-│   │   ├── slack.py
-│   │   └── webhook.py
-│
-│   └── utils/
-│       ├── __init__.py
-│       ├── logger.py
-│       └── config.py
-│
-├── workflows/
-│   ├── workflow_document_summarization.yaml
-│   ├── workflow_ticket_routing.yaml
-│   └── workflow_expense_validation.yaml
-│
-└── demos/
-    └── test_workflow_execution.ipynb
+# 🤖 Enterprise LLM Workflow Orchestration Platform  
+A production-grade orchestration engine that executes multi-step AI workflows using LLM agents, retry policies, task routing, connectors, and API endpoints.
+
+Built to simulate real-world automation platforms like:
+- Workato AI
+- UiPath Autopilot
+- Salesforce Einstein Automate
+- Zapier AI Actions
+
+---
+
+## 🚀 Features
+✔ Workflow execution engine  
+✔ Multi-agent task routing  
+✔ Retry policies + exponential backoff  
+✔ State tracking + workflow history  
+✔ Slack + Google Drive connectors  
+✔ FastAPI REST API triggers  
+✔ YAML-based workflow definitions  
+✔ Fully modular enterprise architecture  
+
+---
+
+## 🔧 Workflow Example
+```
+document_received → classifier_agent → summarizer_agent → decision_agent → slack_notifier
+```
+
+---
+
+## 🗂 Workflow Definitions (YAML)
+Located in `workflows/`.
+
+Example:
+```yaml
+name: document_summarization
+steps:
+  - agent: classifier_agent
+  - agent: summarizer_agent
+  - agent: decision_agent
+  - connector: slack
+```
+
+---
+
+## ▶ Run the server
+```
+pip install -r requirements.txt
+uvicorn src.main:app --reload
+```
+
+---
+
+## 📬 API Trigger Example
+```
+POST /run-workflow
+{
+  "workflow_name": "document_summarization",
+  "payload": { "text": "..." }
+}
+```
+
+---
+
+## 📦 Output Example
+```
+{
+  "workflow": "document_summarization",
+  "status": "completed",
+  "steps_completed": 4,
+  "results": {...}
+}
+```
+
+---
+
+## 🧠 Agents Included
+- Classifier Agent (categorizes input)
+- Summarizer Agent (LLM summary)
+- Extractor Agent (extract fields)
+- Decision Agent (business logic)
+
+---
+
+## 🛠 Tech Stack
+- Python  
+- FastAPI  
+- YAML  
+- LangChain  
+- Groq / OpenAI  
+- Async orchestrator  
+
